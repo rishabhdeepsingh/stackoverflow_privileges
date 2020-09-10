@@ -1,4 +1,4 @@
-package com.example.stackoverflowprivlages.ui
+package com.example.stackoverflowprivlages.ui.list
 
 import com.example.stackoverflowprivlages.data.repository.PrivilegesRepository
 import com.example.stackoverflowprivlages.internal.lazyDeferred

@@ -69,6 +69,9 @@ dependencies {
     implementation "com.xwray:groupie:2.1.0"
     implementation "com.xwray:groupie-kotlin-android-extensions:2.1.0"
 
+    def nav_version = "2.3.0"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
 
     implementation fileTree(dir: "libs", include: ["*.jar"])

@@ -7,7 +7,7 @@ import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.privileges_item.*
 
 class PrivilegeItem(
-    private val unitSpecificPrivilegesEntry: UnitSpecificPrivilegesEntry
+    val unitSpecificPrivilegesEntry: UnitSpecificPrivilegesEntry
 ) : Item() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {

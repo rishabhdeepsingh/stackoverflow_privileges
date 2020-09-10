@@ -5,15 +5,13 @@ import com.example.stackoverflowprivlages.data.db.PrivilegesDatabase
 import com.example.stackoverflowprivlages.data.network.*
 import com.example.stackoverflowprivlages.data.repository.PrivilegesRepository
 import com.example.stackoverflowprivlages.data.repository.PrivilegesRepositoryImpl
-import com.example.stackoverflowprivlages.ui.PrivilegesListViewModelFactory
+import com.example.stackoverflowprivlages.ui.list.PrivilegesListViewModelFactory
+import com.example.stackoverflowprivlages.ui.detail.PrivilegesDetailsFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.androidModule
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
-import org.kodein.di.generic.singleton
+import org.kodein.di.generic.*
 
 class PrivilegesApplication : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
@@ -34,6 +32,7 @@ class PrivilegesApplication : Application(), KodeinAware {
             )
         }
         bind() from provider { PrivilegesListViewModelFactory(instance()) }
+        bind() from factory { id: Int -> PrivilegesDetailsFactory(id, instance()) }
     }
 
     override fun onCreate() {

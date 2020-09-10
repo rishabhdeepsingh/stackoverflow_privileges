@@ -16,4 +16,7 @@ interface PrivilegesDao {
 
     @Query("SELECT * FROM privileges")
     fun getPrivileges(): LiveData<List<UnitSpecificPrivilegesEntry>>
+
+    @Query("SELECT * FROM privileges WHERE id = :id")
+    fun getDetailedPrivilegeById(id: Int): LiveData<UnitSpecificPrivilegesEntry>
 }

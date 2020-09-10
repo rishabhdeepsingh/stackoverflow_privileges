@@ -2,7 +2,6 @@ package com.example.stackoverflowprivlages.data.repository
 
 import androidx.lifecycle.LiveData
 import com.example.stackoverflowprivlages.data.db.PrivilegesDao
-import com.example.stackoverflowprivlages.data.db.entity.PrivilegeEntry
 import com.example.stackoverflowprivlages.data.db.entity.UnitSpecificPrivilegesEntry
 import com.example.stackoverflowprivlages.data.network.PrivilegesNetworkDataSource
 import com.example.stackoverflowprivlages.data.network.STACK_OVERFLOW
@@ -28,6 +27,13 @@ class PrivilegesRepositoryImpl(
         return withContext(Dispatchers.IO) {
             initPrivilegesData()
             return@withContext currentPrivilegesDao.getPrivileges()
+        }
+    }
+
+    override suspend fun getPrivilegesById(id: Int): LiveData<out UnitSpecificPrivilegesEntry> {
+        return withContext(Dispatchers.IO){
+            initPrivilegesData()
+            return@withContext currentPrivilegesDao.getDetailedPrivilegeById(id)
         }
     }
 

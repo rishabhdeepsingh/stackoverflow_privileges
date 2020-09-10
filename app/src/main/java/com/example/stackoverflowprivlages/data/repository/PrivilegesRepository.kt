@@ -7,4 +7,6 @@ interface PrivilegesRepository {
 
     suspend fun getPrivilegesList(): LiveData<out List<UnitSpecificPrivilegesEntry>>
 
+    suspend fun getPrivilegesById(id: Int): LiveData<out UnitSpecificPrivilegesEntry>
+
 }

@@ -1,4 +1,4 @@
-package com.example.stackoverflowprivlages.ui
+package com.example.stackoverflowprivlages.ui.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
