@@ -2,7 +2,7 @@ package com.example.stackoverflowprivlages.data.repository
 
 import androidx.lifecycle.LiveData
 import com.example.stackoverflowprivlages.data.db.PrivilegesDao
-import com.example.stackoverflowprivlages.data.db.entity.UnitSpecificPrivilegesEntry
+import com.example.stackoverflowprivlages.data.db.entity.DbPrivilegesEntry
 import com.example.stackoverflowprivlages.data.network.PrivilegesNetworkDataSource
 import com.example.stackoverflowprivlages.data.network.STACK_OVERFLOW
 import com.example.stackoverflowprivlages.data.network.response.PrivilegesResponse
@@ -10,7 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.threeten.bp.ZonedDateTime
 
 class PrivilegesRepositoryImpl(
     private val currentPrivilegesDao: PrivilegesDao,
@@ -23,16 +22,16 @@ class PrivilegesRepositoryImpl(
         }
     }
 
-    override suspend fun getPrivilegesList(): LiveData<out List<UnitSpecificPrivilegesEntry>> {
+    override suspend fun getPrivilegesList(): LiveData<out List<DbPrivilegesEntry>> {
         return withContext(Dispatchers.IO) {
-            initPrivilegesData()
+            currentPrivilegesDao.deleteAllPrivileges()
+            privilegesNetworkDataSource.fetchPrivileges(STACK_OVERFLOW)
             return@withContext currentPrivilegesDao.getPrivileges()
         }
     }
 
-    override suspend fun getPrivilegesById(id: Int): LiveData<out UnitSpecificPrivilegesEntry> {
-        return withContext(Dispatchers.IO){
-            initPrivilegesData()
+    override suspend fun getPrivilegesById(id: Int): LiveData<out DbPrivilegesEntry> {
+        return withContext(Dispatchers.IO) {
             return@withContext currentPrivilegesDao.getDetailedPrivilegeById(id)
         }
     }
@@ -42,20 +41,4 @@ class PrivilegesRepositoryImpl(
             currentPrivilegesDao.upsert(fetchedPrivileges.privilegeEntries)
         }
     }
-
-    private suspend fun initPrivilegesData() {
-        if (isFetchCurrentNeeded(ZonedDateTime.now().minusHours(1))) {
-            fetchPrivileges()
-        }
-    }
-
-    private suspend fun fetchPrivileges() {
-        privilegesNetworkDataSource.fetchPrivileges(STACK_OVERFLOW)
-    }
-
-    private fun isFetchCurrentNeeded(lastFetchTime: ZonedDateTime): Boolean {
-        val thirtyMinutesAgo = ZonedDateTime.now().minusMinutes(30)
-        return lastFetchTime.isBefore(thirtyMinutesAgo)
-    }
-
 }

@@ -1,4 +1,4 @@
-package com.example.stackoverflowprivlages
+package com.example.stackoverflowprivlages.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,12 +6,12 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.stackoverflowprivlages.data.db.entity.UnitSpecificPrivilegesEntry
-import com.example.stackoverflowprivlages.ui.PrivilegeItem
+import com.example.stackoverflowprivlages.R
+import com.example.stackoverflowprivlages.data.db.entity.DbPrivilegesEntry
 import com.example.stackoverflowprivlages.ui.base.ScopedActivity
 import com.example.stackoverflowprivlages.ui.detail.PrivilegesDetails
+import com.example.stackoverflowprivlages.ui.list.PrivilegeItem
 import com.example.stackoverflowprivlages.ui.list.PrivilegesListViewModel
 import com.example.stackoverflowprivlages.ui.list.PrivilegesListViewModelFactory
 import com.xwray.groupie.GroupAdapter
@@ -52,7 +52,7 @@ class PrivilegesListActivity : ScopedActivity(), KodeinAware {
         })
     }
 
-    private fun List<UnitSpecificPrivilegesEntry>.toPrivilegeItems(): List<PrivilegeItem> {
+    private fun List<DbPrivilegesEntry>.toPrivilegeItems(): List<PrivilegeItem> {
         return this.map {
             PrivilegeItem(it)
         }

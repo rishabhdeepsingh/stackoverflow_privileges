@@ -2,7 +2,7 @@ package com.example.stackoverflowprivlages.data.db.entity
 
 import androidx.room.ColumnInfo
 
-data class UnitSpecificPrivilegesEntry(
+data class DbPrivilegesEntry(
     @ColumnInfo(name = "shortDescription")
     val shortDescription: String,
 

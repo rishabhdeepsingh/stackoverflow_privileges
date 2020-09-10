@@ -1,13 +1,13 @@
-package com.example.stackoverflowprivlages.ui
+package com.example.stackoverflowprivlages.ui.list
 
 import com.example.stackoverflowprivlages.R
-import com.example.stackoverflowprivlages.data.db.entity.UnitSpecificPrivilegesEntry
+import com.example.stackoverflowprivlages.data.db.entity.DbPrivilegesEntry
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.privileges_item.*
 
 class PrivilegeItem(
-    val unitSpecificPrivilegesEntry: UnitSpecificPrivilegesEntry
+    val unitSpecificPrivilegesEntry: DbPrivilegesEntry
 ) : Item() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
